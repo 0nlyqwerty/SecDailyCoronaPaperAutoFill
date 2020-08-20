@@ -25,11 +25,10 @@ public class MainActivity extends AppCompatActivity {
 		WebSettings webSettings = mWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 
-		mWebView.setWebViewClient(new WebViewClient() {
+		mWebView.setWebChromeClient(new WebChromeClient() {
 			@Override
-			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				view.loadUrl(url);
-				return true;
+			public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+				return super.onJsAlert(view, url, message, result); // super.onJsAlert는 false를 return한다
 			}
 		});
 		Intent intent = getIntent();
