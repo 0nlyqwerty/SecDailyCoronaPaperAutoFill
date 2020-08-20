@@ -13,6 +13,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 	final String TAG = "MAIN_ACTIVITY";
@@ -94,5 +95,7 @@ public class MainActivity extends AppCompatActivity {
 		view.evaluateJavascript("(function() { document.getElementById(\"userName\").value=\"" + userName + "\"})()", null);
 		view.evaluateJavascript("(function() { document.getElementById(\"empNo\").value=\"" + empNo + "\"})()", null);
 		view.evaluateJavascript("(function() { document.getElementById(\"telNumber\").value=\"" + telNo + "\"})()", null);
+
+		Toast.makeText(mContext.getApplicationContext(), "기본값 설정완료!",Toast.LENGTH_SHORT).show();
 	}
 }
