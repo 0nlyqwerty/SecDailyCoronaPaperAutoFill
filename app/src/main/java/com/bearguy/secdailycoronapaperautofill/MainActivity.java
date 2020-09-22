@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 	private EditText et_telNumber;
 	private Button btn_set;
 
+	private int progressTwiceCallCounter = 0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -68,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
 			public void onProgressChanged(WebView view, int newProgress) {
 				super.onProgressChanged(view, newProgress);
 
-				if (newProgress == 100) {
+				if (newProgress == 100 && ++progressTwiceCallCounter == 2) {
+					progressTwiceCallCounter = 0;
 					Log.d(TAG, "loading complete !");
 					setValues(view);
 				}
@@ -95,6 +98,15 @@ public class MainActivity extends AppCompatActivity {
 		view.evaluateJavascript("(function() { document.getElementById(\"userName\").value=\"" + userName + "\"})()", null);
 		view.evaluateJavascript("(function() { document.getElementById(\"empNo\").value=\"" + empNo + "\"})()", null);
 		view.evaluateJavascript("(function() { document.getElementById(\"telNumber\").value=\"" + telNo + "\"})()", null);
+
+		view.evaluateJavascript("(function() { document.querySelector(\"[name=answer1][value=N]\").click()})()", null);
+		view.evaluateJavascript("(function() { document.querySelector(\"[name=answer3][value=N]\").click()})()", null);
+		view.evaluateJavascript("(function() { document.querySelector(\"[name=answer4][value=N]\").click()})()", null);
+		view.evaluateJavascript("(function() { document.querySelector(\"[name=answer5][value=N]\").click()})()", null);
+		view.evaluateJavascript("(function() { document.querySelector(\"[name=answer7][value=N]\").click()})()", null);
+		view.evaluateJavascript("(function() { document.querySelector(\"input[name=ivChk1]\").checked=true})()", null);
+
+		view.evaluateJavascript("goSave()", null);
 
 		Toast.makeText(mContext.getApplicationContext(), "기본값 설정완료!",Toast.LENGTH_SHORT).show();
 	}
